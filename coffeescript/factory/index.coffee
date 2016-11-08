@@ -1,24 +1,28 @@
-class Product
+class ProductStructure
 
-class ConcreteProduct1 extends Product
-class ConcreteProduct2 extends Product
-class ConcreteProduct3 extends Product
+class RealProductA extends ProductStructure
+class RealProductB extends ProductStructure
+class RealProductC extends ProductStructure
 
-class Creator
-  factoryMethod: ->
-  operation: -> product = @factoryMethod()
+class CreatorStructure
+  build: ->
 
-class ConcreteCreator extends Creator
-  factoryMethod: (id) ->
-    switch id
-      when id is 1 then return new ConcreteProduct1()
-      when id is 2 then return new ConcreteProduct2()
-      else return new ConcreteProduct3()
+class RealCreator extends CreatorStructure
+  build: ( type ) ->
+    switch type
+      when 1
+        return new RealProductA()
+      when 2
+        return new RealProductB()
+      else
+        return new RealProductC()
 
 class Example
   @run: ->
-    creator = new ConcreteCreator()
-    console.log creator.factoryMethod 1
-    console.log creator.factoryMethod 2
-    console.log creator.factoryMethod 3
+    creator = new RealCreator()
+    console.log creator.build( 1 )
+    console.log creator.build( 2 )
+    console.log creator.build( 3 )
+    return
+
 Example.run()
