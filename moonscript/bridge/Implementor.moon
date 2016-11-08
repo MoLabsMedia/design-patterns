@@ -1,0 +1,4 @@
+class Implementor
+  operationImp: =>
+
+{ :Implementor }

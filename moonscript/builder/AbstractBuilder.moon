@@ -1,0 +1,4 @@
+class AbstractBuilder
+  buildPart: () =>
+
+{ :AbstractBuilder }
