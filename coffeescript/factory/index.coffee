@@ -1,12 +1,17 @@
+# abstract product:
 class ProductStructure
 
+# concrete product:
 class RealProductA extends ProductStructure
 class RealProductB extends ProductStructure
 class RealProductC extends ProductStructure
 
+# abstract creator:
 class CreatorStructure
   build: ->
 
+# concrete creator: 
+#   use input to control output product instances
 class RealCreator extends CreatorStructure
   build: ( type ) ->
     switch type

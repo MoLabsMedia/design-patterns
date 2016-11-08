@@ -1,34 +1,35 @@
-class AbstractProductA
+class ProductAStructure
   constructor: ( arg ) -> console.log arg
-class AbstractProductB
+class ProductBStructure
   constructor: ( arg ) -> console.log arg
 
-class ConcreteProductA1 extends AbstractProductA
-class ConcreteProductA2 extends AbstractProductA
-class ConcreteProductB1 extends AbstractProductB
-class ConcreteProductB2 extends AbstractProductB
+class RealProductA1 extends ProductAStructure
+class RealProductA2 extends ProductAStructure
+class RealProductB1 extends ProductBStructure
+class RealProductB2 extends ProductBStructure
 
-class AbstractFactory
-  createProductA: ->
-  createProductB: ->
+class FactoryStructure
+  buildA: ->
+  buildB: ->
 
-class ConcreteFactory1 extends AbstractFactory
-  createProductA: -> new ConcreteProductA1( 'ConcreteProductA1' )
-  createProductB: -> new ConcreteProductB1( 'ConcreteProductB1' )
-class ConcreteFactory2 extends AbstractFactory
-  createProductA: -> new ConcreteProductA2( 'ConcreteProductA2' )
-  createProductB: -> new ConcreteProductB2( 'ConcreteProductB2' )
+class RealFactoryA extends FactoryStructure
+  buildA: -> new RealProductA1( 'RealProductA1' )
+  buildB: -> new RealProductB1( 'RealProductB1' )
+class RealFactoryB extends FactoryStructure
+  buildA: -> new RealProductA2( 'RealProductA2' )
+  buildB: -> new RealProductB2( 'RealProductB2' )
 
-class Client
+class Builder
   constructor: ( factory ) ->
-    @abstractProductA = factory.createProductA()
-    @abstractProductB = factory.createProductB()
+    @productA = factory.buildA()
+    @productB = factory.buildB()
+    return
 
 class Example
   @run: ->
-    factory1 = new ConcreteFactory1()
-    client1 = new Client( factory1 )
-    factory2 = new ConcreteFactory2()
-    client2 = new Client( factory2 )
+    factoryA = new RealFactoryA()
+    builderA = new Builder( factoryA )
+    factoryB = new RealFactoryB()
+    builderB = new Builder( factoryB )
     
 Example.run()
