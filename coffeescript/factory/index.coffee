@@ -10,9 +10,9 @@ class CreatorStructure
 class RealCreator extends CreatorStructure
   build: ( type ) ->
     switch type
-      when 1
+      when 'a'
         return new RealProductA()
-      when 2
+      when 'b'
         return new RealProductB()
       else
         return new RealProductC()
@@ -20,9 +20,9 @@ class RealCreator extends CreatorStructure
 class Example
   @run: ->
     creator = new RealCreator()
-    console.log creator.build( 1 )
-    console.log creator.build( 2 )
-    console.log creator.build( 3 )
+    console.log creator.build( 'a' )
+    console.log creator.build( 'b' )
+    console.log creator.build( 'c' )
     return
 
 Example.run()
