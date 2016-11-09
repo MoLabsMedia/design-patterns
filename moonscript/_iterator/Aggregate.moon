@@ -1,4 +1,0 @@
-class Aggregate
-  createIterator: ->
-
-{ :Aggregate }
