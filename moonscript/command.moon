@@ -1,39 +1,39 @@
 class AbstractCommand
-  run: ->
+  run: () =>
 class ConcreteCommandA extends AbstractCommand
-  constructor: ( @receiver ) ->
-  run: -> @receiver.doThis()
+  new: ( @receiver ) =>
+  run: () => @receiver\doThis()
 class ConcreteCommandB extends AbstractCommand
-  constructor: ( @receiver ) ->
-  run: -> @receiver.doThat()
+  new: ( @receiver ) =>
+  run: () => @receiver\doThat()
 
 class Receiver
-  doThis: -> 
-    console.log 'do this'
+  doThis: () => 
+    print 'do this'
     return
-  doThat: -> 
-    console.log 'do that'
+  doThat: () => 
+    print 'do that'
     return
 
 class Invoker
-  run: ( cmd ) -> 
-    cmd.run()
+  run: ( cmd ) => 
+    cmd\run()
     return
 
 class Main
-  @run: ( type ) ->
-    receiver = new Receiver()
-    cmdA = new ConcreteCommandA( receiver )
-    cmdB = new ConcreteCommandB( receiver )
-    invoker = new Invoker()
+  @run: ( type ) =>
+    receiver = Receiver()
+    cmdA = ConcreteCommandA( receiver )
+    cmdB = ConcreteCommandB( receiver )
+    invoker = Invoker()
     switch type
       when 'a'
-        invoker.run( cmdA )
+        invoker\run( cmdA )
       when 'b'
-        invoker.run( cmdB )
+        invoker\run( cmdB )
       else
-        console.log 'no command to run'
+        print 'no command to run'
     return
 
-Main.run( 'a' )
-Main.run( 'b' )
+Main\run( 'a' )
+Main\run( 'b' )

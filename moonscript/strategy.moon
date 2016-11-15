@@ -1,32 +1,32 @@
 class Context
-  constructor: ( @strategy ) ->
-  applyAlgorithm: ->
-    return @strategy.applyAlgorithm()
+  new: ( @strategy ) =>
+  applyAlgorithm: () =>
+    return @strategy\applyAlgorithm()
 
 class AbstractStrategy
-  applyAlgorithm: ->
+  applyAlgorithm: () =>
 class ConcreteStrategyA extends AbstractStrategy
-  applyAlgorithm: ->
+  applyAlgorithm: () =>
     return 'Algorithm applied in Concrete Strategy A'
 class ConcreteStrategyB extends AbstractStrategy
-  applyAlgorithm: ->
+  applyAlgorithm: () =>
     return 'Algorithm applied in Concrete Strategy B'
 class ConcreteStrategyC extends AbstractStrategy
-  applyAlgorithm: ->
+  applyAlgorithm: () =>
     return 'Algorithm applied in Concrete Strategy C'
 
 class Main
-  @run: ->
-    ctx = new Context( new ConcreteStrategyA() )
-    resultA = ctx.applyAlgorithm()
-    console.log resultA
+  @run: () =>
+    ctx = Context( ConcreteStrategyA() )
+    resultA = ctx\applyAlgorithm()
+    print resultA
 
-    ctx = new Context( new ConcreteStrategyB() )
-    resultB = ctx.applyAlgorithm()
-    console.log resultB
+    ctx = Context( ConcreteStrategyB() )
+    resultB = ctx\applyAlgorithm()
+    print resultB
 
-    ctx = new Context( new ConcreteStrategyC() )
-    resultC = ctx.applyAlgorithm()
-    console.log resultC
+    ctx = Context( ConcreteStrategyC() )
+    resultC = ctx\applyAlgorithm()
+    print resultC
 
 Main.run()

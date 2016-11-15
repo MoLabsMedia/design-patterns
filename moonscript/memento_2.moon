@@ -1,43 +1,29 @@
 class Memento
-  new: ( data ) =>
-    @data = data
-    return 
+  new: ( @prop ) =>
+  getProp: () =>
+    return @prop
 
-{ :Memento }
-import Memento from require 'Memento'
-
-class States
-  _mems = {}
-  _addMem = ( s ) ->
-    m = Memento( s )
-    table.insert( _mems, m )
-    print #_mems
-    return m
-  _rmMem = () ->
-    table.remove( _mems, #_mems )
-    return _mems[ #_mems ]
-
-  new: ( state ) =>
-    if state
-      @state = state
-      _addMem( state )
-    return
-  save: ( newState ) =>
-    @state = newState
-    return _addMem( newState )
-  restore: ( mem ) =>
-    if mem and mem.__class == Memento
-      @state = mem.data
-    elseif #_mems >= 2
-      @state = _mems[ #_mems - 1 ].data
+class Config
+  new: ( @prop ) =>
+  getProp: () =>
+    return @prop
+  saveProp: ( prop_val ) =>
+    @prop = prop_val
+    memento = Memento( @prop )
+    return memento
+  restoreProp: ( memento ) =>
+    @prop = memento\getProp()
     return
 
-{ :States }
-import States from require 'States'
+prop = "The original string"
+pt = Config( prop )
+pt\prop -- => "The original string"
 
-sts = States( 'begin' )
-print sts.state
-m = sts\save( 'doing' )
-print sts.state
-sts\restore()
-print sts.state
+memento = pt\saveProp "A string"
+print pt\getProp() -- => "A string"
+
+pt\saveProp( "Yet another string" )
+print pt\getProp() -- => "Yet another string"
+
+pt\restoreProp( memento )
+print pt\getProp() -- => "The original string"

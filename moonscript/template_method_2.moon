@@ -1,72 +1,26 @@
-class Template
-  -- private properties: _prop = val
-  
-  -- private function: _function = () ->
-
-  new: () => return
-  render: () =>
-    @genHeader()
-    @genBody()
-    @genFooter()
+class Document
+  produceDocument: () =>
+    @produceHeader()
+    @produceBody()
     return
-  genHeader: () =>
-  genBody: () =>
-  genFooter: () =>
 
-{ :Template }
-import Template from require 'Template'
+  produceHeader: () =>
+  produceBody: () =>
 
-class HeaderOnly extends Template
-  -- private properties: _prop = val
-  
-  -- private function: _function = () ->
-
-  new: () =>
-  genHeader: () =>
-    print 'this is the header'
+class DocWithHeader extends Document
+  produceHeader: () =>
+    print "Producing header for DocWithHeader"  
     return
-  
-{ :HeaderOnly }
-import Template from require 'Template'
 
-class FooterOnly extends Template
-  -- private properties: _prop = val
-  
-  -- private function: _function = () ->
-
-  new: () =>
-  genFooter: () =>
-    print 'this is the footer'
+  produceBody: () =>
+    print "Producing body for DocWithHeader"
     return
-    
-{ :FooterOnly }
-import Template from require 'Template'
 
-class FullArticle extends Template
-  -- private properties: _prop = val
-  
-  -- private function: _function = () ->
-
-  new: () =>
-  genHeader: () =>
-    print 'this is the header'
+class DocWithoutHeader extends Document
+  produceBody: () =>
+    print "Producing body for DocWithoutHeader"
     return
-  genBody: () =>
-    print 'this is the body'
-    return 
-  genFooter: () =>
-    print 'this is the footer'
-    return
-    
-{ :FullArticle }
-import FooterOnly from require 'FooterOnly'
-import HeaderOnly from require 'HeaderOnly'
-import FullArticle from require 'FullArticle'
 
-docs = {
-  FooterOnly()
-  HeaderOnly()
-  FullArticle()
-}
-for i, doc in ipairs docs
-  doc\render()
+docs = [ DocWithHeader, DocWithoutHeader ]
+for _, doc in ipairs( docs )
+  doc\produceDocument() 

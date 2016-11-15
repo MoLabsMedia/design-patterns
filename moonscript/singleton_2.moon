@@ -1,20 +1,19 @@
-class _Singleton
-  new: () => 
+class Helper
+  new: ( @info ) =>
+  echo: () => 
+    print @info
+    return
 
 class Singleton
-  _instance = nil
+  -- You can add statements inside the class definition which helps establish private scope ( due to closures ) instance is defined as null to force correct scope
+  instance = null
+  -- Create a private class that we can initialize however defined inside this scope to force the use of the singleton class\
+  -- This is a static method used to either retrieve the instance or create a one\
+  @instance: ( info ) =>
+    return instance ?= Helper( info )
 
-  getInstance: () => 
-    if not _instance then _instance = _Singleton()
-    return _instance
+a = Singleton\instance( "Hello A" )
+a\echo() -- => "Hello A"
 
-{ :Singleton }
-import Singleton from require 'Singleton'
-
-s1 = Singleton\getInstance()
-s2 = Singleton\getInstance()
-
-print s1
-print s2
-
-if s1 == s2 then print 'the same'
+b = Singleton\instance( "Hello B" )
+b\echo() -- => "Hello A"

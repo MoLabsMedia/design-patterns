@@ -1,36 +1,36 @@
 class AbstractColleague
-  constructor: ( @mediator ) ->
-  fireEvent: -> 
+  new: ( @mediator ) =>
+  fireEvent: () => 
     @change()
     return
-  change: -> 
-    @mediator.changeColleague( @ )
+  change: () => 
+    @mediator\changeColleague( @ )
     return
 
 class ConcreteColleagueA extends AbstractColleague
 class ConcreteColleagueB extends AbstractColleague
 
 class Mediator
-  changeColleague: ( colleague ) ->
+  changeColleague: ( colleague ) =>
 class ConcreteMediator extends Mediator
-  createColleagues: ->
-    @colleague1 = new ConcreteColleagueA( @ )
-    @colleague2 = new ConcreteColleagueB( @ )
-    @colleague1.fireEvent()
-    @colleague2.fireEvent()
+  createColleagues: () =>
+    @colleague1 = ConcreteColleagueA( @ )
+    @colleague2 = ConcreteColleagueB( @ )
+    @colleague1\fireEvent()
+    @colleague2\fireEvent()
     return
-  changeColleague: ( colleague ) ->
+  changeColleague: ( colleague ) =>
     if colleague instanceof ConcreteColleagueA 
-      console.log 'colleague1 changed'
+      print 'colleague1 changed'
     else if colleague instanceof ConcreteColleagueB 
-      console.log 'colleague2 changed'
+      print 'colleague2 changed'
     else 
-      console.log 'nothing happened'
+      print 'nothing happened'
     return
 
 class Main
-  @run: ->
-    m = new ConcreteMediator()
-    m.createColleagues()
+  @run: () =>
+    m = ConcreteMediator()
+    m\createColleagues()
 
 Main.run()

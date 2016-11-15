@@ -1,42 +1,42 @@
 class Memento
-  constructor: ( @prop ) ->
-  getProp: -> 
+  new: ( @prop ) =>
+  getProp: () => 
     return @prop
 
 class Originator
-  constructor: ( @prop ) ->
-  createMementoFromProperty: -> 
-    return new Memento( @prop )
-  changePropByMemento: ( memento ) ->
-    @prop = memento.getProp()
+  new: ( @prop ) =>
+  createMementoFromProperty: () => 
+    return Memento( @prop )
+  changePropByMemento: ( memento ) =>
+    @prop = memento\getProp()
     return
-  changeProp: ( @prop ) ->
-  showProp: -> 
-    console.log @prop
+  changeProp: ( @prop ) =>
+  showProp: () => 
+    print @prop
     return
 
 class Caretaker
-  constructor: ( @originator ) ->
-  doCommand: ->
-    @memento = @originator.createMementoFromProperty()
+  new: ( @originator ) =>
+  doCommand: () =>
+    @memento = @originator\createMementoFromProperty()
     return
-  undoCommand: -> 
-    @originator.changePropByMemento( @memento )
+  undoCommand: () => 
+    @originator\changePropByMemento( @memento )
     return
 
 class Main
-  @run: ->
-    originator = new Originator( 'a' )
-    caretaker = new Caretaker( originator )
+  @run: () =>
+    originator = Originator( 'a' )
+    caretaker = Caretaker( originator )
 
-    originator.showProp()
-    caretaker.doCommand()
+    originator\showProp()
+    caretaker\doCommand()
 
-    originator.changeProp( 'b' )
-    originator.showProp()
+    originator\changeProp( 'b' )
+    originator\showProp()
 
-    caretaker.undoCommand()
-    originator.showProp()
+    caretaker\undoCommand()
+    originator\showProp()
     return
 
 Main.run()

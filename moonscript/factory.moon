@@ -4,23 +4,23 @@ class ConcreteProductB extends AbstractProduct
 class ConcreteProductC extends AbstractProduct
 
 class AbstractCreator
-  build: ->
+  build: () =>
 class ConcreteCreator extends AbstractCreator
-  build: ( type ) ->
+  build: ( type ) =>
     switch type
       when 'a'
-        return new ConcreteProductA()
+        return ConcreteProductA()
       when 'b'
-        return new ConcreteProductB()
+        return ConcreteProductB()
       else
-        return new ConcreteProductC()
+        return ConcreteProductC()
 
 class Main
-  @run: ->
-    creator = new ConcreteCreator()
-    console.log creator.build( 'a' )
-    console.log creator.build( 'b' )
-    console.log creator.build( 'c' )
+  @run: () =>
+    creator = ConcreteCreator()
+    print creator\build( 'a' )
+    print creator\build( 'b' )
+    print creator\build( 'c' )
     return
 
 Main.run()

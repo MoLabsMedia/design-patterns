@@ -1,39 +1,39 @@
 class Product
-  constructor: -> 
-    @final_product = []
+  new: () => 
+    @final_product = {}
     return
-  addPart: ( part ) -> 
-    @final_product.push part
+  addPart: ( part ) => 
+    @final_product\push part
     return
-  display: () -> 
+  display: () => 
     return @final_product
 
 class AbstractBuilder
-  buildPart: ->
+  buildPart: () =>
 class ConcreteBuilder extends AbstractBuilder
-  constructor: -> 
-    @product = new Product()
+  new: () => 
+    @product = Product()
     return
-  buildPart: ( part ) -> 
-    @product.addPart( part )
+  buildPart: ( part ) => 
+    @product\addPart( part )
     return
-  getProduct: -> 
+  getProduct: () => 
     return @product
 
 class Assembler
-  constructor: ( @builder ) ->
-  assemble: ( parts ) ->
-    for part in parts
-      @builder.buildPart( part )
+  new: ( @builder ) =>
+  assemble: ( parts ) =>
+    for _, part in ipairs( parts )
+      @builder\buildPart( part )
     return
 
 class Client
-  @run: ->
-    concreteBuilder = new ConcreteBuilder()
-    assembly = new Assembler( concreteBuilder )
-    assembly.assemble( [ 'head', 'body', 'tail' ] )
-    product = concreteBuilder.getProduct()
-    console.log product.display()
+  @run: () =>
+    concreteBuilder = ConcreteBuilder()
+    assembly = Assembler( concreteBuilder )
+    assembly\assemble( [ 'head', 'body', 'tail' ] )
+    product = concreteBuilder\getProduct()
+    print product\display()
     return
 
 Main.run()

@@ -1,21 +1,21 @@
 class Singleton
   @instance: null
-  @getInstance: -> 
-    return @instance ||= new @ arguments...
+  @getInstance: () => 
+    return @instance ||= @ arguments\\\
 
 class Main
-  @run: ->
+  @run: () =>
     class Thing extends Singleton
       props: {}
-      constructor: ->
-      setProp: ( key, val ) -> 
+      new: () =>
+      setProp: ( key, val ) => 
         @props[ key ] = val
         return
-      getProp: ( key ) -> 
+      getProp: ( key ) => 
         return @props[ key ]
 
-    something = Thing.getInstance()
-    something.setProp( 'key', 'value' )
-    console.log something.getProp( 'key' )
+    something = Thing\getInstance()
+    something\setProp( 'key', 'value' )
+    print something\getProp( 'key' )
 
 Main.run()

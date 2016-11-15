@@ -1,23 +1,23 @@
 class Adaptee
-  request: -> 
-    console.log 'Adaptee request'
+  request: () => 
+    print 'Adaptee request'
     return
 
 class Target
-  request: -> 
-    console.log 'default request'
+  request: () => 
+    print 'default request'
     return
 class Adapter extends Target
-  constructor: ( @adaptee ) ->
-  request: -> 
-    @adaptee.request()
+  new: ( @adaptee ) =>
+  request: () => 
+    @adaptee\request()
     return
 
 class Main
-  @run: ->
-    adaptee = new Adaptee()
-    adapter = new Adapter( adaptee )
-    adapter.request()
+  @run: () =>
+    adaptee = Adaptee()
+    adapter = Adapter( adaptee )
+    adapter\request()
     return
 
 Main.run()

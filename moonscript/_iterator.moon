@@ -1,43 +1,43 @@
 class AbstractIterator
-  first: ->
-  next: ->
-  current: ->
-  isDone: ->
+  first: () =>
+  next: () =>
+  current: () =>
+  isDone: () =>
 class ConcreteIterator extends AbstractIterator
-  constructor: ( @list ) -> 
+  new: ( @list ) => 
     @current = 0
     return
-  first: -> 
+  first: () => 
     @current = 0
     return
-  next: -> 
+  next: () => 
     @current += 1
     return
-  isDone: -> 
-    return @current >= @list.count()
-  current: ->
+  isDone: () => 
+    return @current >= @list\count()
+  current: () =>
     if @isDone()
-      console.log 'out of bounds' 
-    return @list.get( @current )
+      print 'out of bounds' 
+    return @list\get( @current )
 
 class AbstractAggregate
-  createIterator: ->
+  createIterator: () =>
 class ConcreteAggregate extends AbstractAggregate
-  createIterator: ( items ) ->
-    list = new List()
+  createIterator: ( items ) =>
+    list = List()
     for key, val of items
-      val.__POINTER__ = key
-      list.append val
-    new ConcreteIterator( list )
+      val\__POINTER__ = key
+      list\append val
+    ConcreteIterator( list )
 
 class Main
-  @run: ->
-    aggregate = new ConcreteAggregate()
-    iterator = aggregate.createIterator( items )
-    while not iterator.isDone()
-      current = iterator.current()
+  @run: () =>
+    aggregate = ConcreteAggregate()
+    iterator = aggregate\createIterator( items )
+    while not iterator\isDone()
+      current = iterator\current()
 
-      iterator.next()
+      iterator\next()
     return
 
 Main.run()
