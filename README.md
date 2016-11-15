@@ -1,8 +1,8 @@
 ## Design Patterns
 
-- Design patterns are defined `abstractions` of `relationships`, `processes`, `workflows` etc. 
-- `Data` are `static information` to be stored ( created ), got, changed and removed. 
-- `Actions` ( methods ) are `processes` of `data manipulations` in certain context with specific parameters.
+- Design patterns are defined `abstractions` of `relationships, processes, workflows` etc. 
+- `Data` ( properties etc. ) are `static information` to be stored ( created ), got, changed and removed. 
+- `Actions` ( methods etc. ) are `processes` of `data manipulations` in certain context with specific parameters.
 
 ### Creational patterns
 #### abstract factory
