@@ -6,13 +6,13 @@
 import java.io.*;
 
 public class DecoratorStream {
+  
   static BufferedReader in = new BufferedReader( new InputStreamReader(System.in ));
 
   interface LCD {
     void write( String[] s );
     void read( String[] s );
   }
-
   static class Core implements LCD {
     public void write( String[] s ) {
       System.out.print( "INPUT:    " );
@@ -22,7 +22,8 @@ public class DecoratorStream {
     }
     public void read( String[] s ) {
       System.out.println( "Output:   " + s[0] );
-  } }
+    } 
+  }
 
   static class Decorator implements LCD {
     private LCD inner;
@@ -30,7 +31,6 @@ public class DecoratorStream {
     public void write( String[] s ) { inner.write( s ); }
     public void read( String[] s ) { inner.read( s ); }
   }
-
   static class Authenticate extends Decorator {
     public Authenticate( LCD inner ) { super( inner ); }
     public void write( String[] s ) {
@@ -46,8 +46,8 @@ public class DecoratorStream {
         in.readLine();
       } catch ( IOException ex ) { ex.printStackTrace(); }
       super.read( s );
-  } }
-
+    } 
+  }
   static class Scramble extends Decorator {
     public Scramble( LCD inner ) { super( inner ); }
     public void write( String[] s ) {
@@ -65,7 +65,8 @@ public class DecoratorStream {
       s[0] = sb.toString();
       System.out.println( "decrypt:" );
       super.read( s );
-  } }
+    } 
+  }
 
   public static void main( String[] args ) {
     LCD stream = new Authenticate( new Scramble( new Core() ) );
@@ -73,13 +74,5 @@ public class DecoratorStream {
     stream.write( str );
     System.out.println( "main:     " + str[0] );
     stream.read( str );
-} }
-
-// Output:
-// PASSWORD: secret
-// INPUT:    the quick brown fox
-// encrypt:
-// main:     oc`xlpd^fe]mjrizajs
-// PASSWORD: secret
-// decrypt:
-// Output:   the quick brown fox
+  } 
+}

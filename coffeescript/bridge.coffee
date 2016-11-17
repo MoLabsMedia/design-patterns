@@ -11,19 +11,21 @@ class ConcreteImplementorB extends AbstractImplementor
 
 class AbstractExecutor
   constructor: ( @imp ) ->
-  execute: -> 
+  implement: -> 
     @imp.implement()
     return
-class ConcreteExecutor extends AbstractExecutor
+class ConcreteExecutorA extends AbstractExecutor
+class ConcreteExecutorB extends AbstractExecutor
 
 class Main
   @run: ->
     ConcreteImplementorA = new ConcreteImplementorA()
-    refinedExecutorA = new ConcreteExecutor( ConcreteImplementorA )
-    refinedExecutorA.execute()
+    refinedExecutorA = new ConcreteExecutorA( ConcreteImplementorA )
+    refinedExecutorA.implement()
+
     ConcreteImplementorB = new ConcreteImplementorB()
-    refinedExecutorB = new ConcreteExecutor( ConcreteImplementorB )
-    refinedExecutorB.execute()
+    refinedExecutorB = new ConcreteExecutorB( ConcreteImplementorB )
+    refinedExecutorB.implement()
     return
     
 Main.run()

@@ -1,26 +1,26 @@
 class AbstractSystem
-  process: () ->
 class ConcreteSystemA extends AbstractSystem
-  process: -> 
+  doThis: -> 
     console.log 'process from ConcreteSystemA'
     return
 class ConcreteSystemB extends AbstractSystem
-  process: -> 
+  doThat: -> 
     console.log 'process from ConcreteSystemB'
     return
 
 class Facade
-  request: ->
+  process: ->
     sysA = new ConcreteSystemA()
-    sysA.process()
+    sysA.doThis()
+
     sysB = new ConcreteSystemB()
-    sysB.process()
+    sysB.doThat()
     return
 
 class Main
   @run: ->
     facade = new Facade()
-    facade.request()
+    facade.process()
     return
 
 Main.run()

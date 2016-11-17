@@ -5,9 +5,9 @@
 
 #include <iostream.h>
 
-enum imageType
-{
-  LSAT, SPOT
+enum imageType {
+  LSAT, 
+  SPOT
 };
 
 class Image
@@ -21,7 +21,7 @@ class Image
     // As each subclass of Image is declared, it registers its prototype
     static void addPrototype(Image *image)
     {
-        _prototypes[_nextSlot++] = image;
+      _prototypes[_nextSlot++] = image;
     }
   private:
     // addPrototype() saves each registered prototype here
@@ -117,8 +117,7 @@ int SpotImage::_count = 1;
 
 // Simulated stream of creation requests
 const int NUM_IMAGES = 8;
-imageType input[NUM_IMAGES] = 
-{
+imageType input[NUM_IMAGES] = {
   LSAT, LSAT, LSAT, SPOT, LSAT, SPOT, SPOT, LSAT
 };
 
@@ -138,14 +137,3 @@ int main()
   for (i = 0; i < NUM_IMAGES; i++)
     delete images[i];
 }
-
-// Output
-
-// LandSatImage::draw 1
-// LandSatImage::draw 2
-// LandSatImage::draw 3
-// SpotImage::draw 1
-// LandSatImage::draw 4
-// SpotImage::draw 2
-// SpotImage::draw 3
-// LandSatImage::draw 5

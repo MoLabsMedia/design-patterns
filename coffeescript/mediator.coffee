@@ -6,7 +6,6 @@ class AbstractColleague
   change: -> 
     @mediator.changeColleague( @ )
     return
-
 class ConcreteColleagueA extends AbstractColleague
 class ConcreteColleagueB extends AbstractColleague
 

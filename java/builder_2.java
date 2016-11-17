@@ -3,7 +3,6 @@
 // URL: https://sourcemaking.com/design_patterns/builder/java/2
 // --------------
 
-/* "Product" */
 class Pizza {
   private String dough = "";
   private String sauce = "";
@@ -14,7 +13,6 @@ class Pizza {
   public void setTopping( String topping ) { this.topping = topping; }
 }
 
-/* "Abstract Builder" */
 abstract class PizzaBuilder {
   protected Pizza pizza;
 
@@ -25,22 +23,17 @@ abstract class PizzaBuilder {
   public abstract void buildSauce();
   public abstract void buildTopping();
 }
-
-/* "ConcreteBuilder" */
 class HawaiianPizzaBuilder extends PizzaBuilder {
   public void buildDough()   { pizza.setDough("cross" ); }
   public void buildSauce()   { pizza.setSauce("mild" ); }
   public void buildTopping() { pizza.setTopping("ham+pineapple" ); }
 }
-
-/* "ConcreteBuilder" */
 class SpicyPizzaBuilder extends PizzaBuilder {
   public void buildDough()   { pizza.setDough("pan baked" ); }
   public void buildSauce()   { pizza.setSauce("hot" ); }
   public void buildTopping() { pizza.setTopping("pepperoni+salami" ); }
 }
 
-/* "Director" */
 class Waiter {
   private PizzaBuilder pizzaBuilder;
 
@@ -55,7 +48,6 @@ class Waiter {
   }
 }
 
-/* A customer ordering a pizza. */
 class BuilderExample {
   public static void main( String[] args ) {
     Waiter waiter = new Waiter();

@@ -10,13 +10,11 @@ class AbstractPrototype
   logProp: -> 
     console.log @prop or '-'
     return
-
 class ConcretePrototype extends AbstractPrototype
 
 class Client
   constructor: ->
-  process: ( proto ) -> 
-    return proto.clone()
+  process: ( proto ) -> return proto.clone()
 
 class Main
   @run: ->

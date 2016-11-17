@@ -7,7 +7,6 @@
 interface Widget {
   void draw();
 }
-
 // 3. "Core" class with "is a" relationship
 class TextField implements Widget {
   private int width, height;
@@ -33,7 +32,6 @@ abstract class Decorator implements Widget {
     wid.draw();
   }
 }
-
 // 6. Optional embellishment
 class BorderDecorator extends Decorator {
   public BorderDecorator( Widget w ) {
@@ -44,7 +42,6 @@ class BorderDecorator extends Decorator {
     System.out.println( "  BorderDecorator" );
   }
 }
-
 // 6. Optional embellishment
 class ScrollDecorator extends Decorator {
   public ScrollDecorator( Widget w ) {
@@ -59,16 +56,7 @@ class ScrollDecorator extends Decorator {
 public class DecoratorDemo {
   public static void main( String[] args ) {
     // 8. Client has the responsibility to compose desired configurations
-    Widget aWidget = new BorderDecorator(
-                       new BorderDecorator(
-                         new ScrollDecorator(
-                           new TextField( 80, 24 ))));
+    Widget aWidget = new BorderDecorator( new BorderDecorator( new ScrollDecorator( new TextField( 80, 24 ) ) ) );
     aWidget.draw();
   }
 }
-
-// Output:
-// TextField: 80, 24
-//    ScrollDecorator
-//    BorderDecorator
-//    BorderDecorator

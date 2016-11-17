@@ -11,8 +11,7 @@ class Main
       setProp: ( key, val ) -> 
         @props[ key ] = val
         return
-      getProp: ( key ) -> 
-        return @props[ key ]
+      getProp: ( key ) -> return @props[ key ]
 
     something = Thing.getInstance()
     something.setProp( 'key', 'value' )

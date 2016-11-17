@@ -16,6 +16,33 @@ public class FactoryFmProto {
       return str;
     }
   }
+  static class PCPhrase extends Expression {
+    static String[] list =  {
+      "\"animal companion\"", "\"vertically challenged\"", 
+        "\"factually inaccurate\"", "\"chronologically gifted\""
+    };
+    private static int next = 0;
+    public PCPhrase() {
+      super( list[next] );
+      next = ( next + 1 ) % list.length;
+    }
+    public Expression cloan() {
+      return new PCPhrase();
+    }
+  }
+  static class NotPCPhrase extends Expression {
+    private static String[] list =  {
+      "\"pet\"", "\"short\"", "\"lie\"", "\"old\""
+    };
+    private static int next = 0;
+    public NotPCPhrase() {
+      super( list[next] );
+      next = ( next + 1 ) % list.length;
+    }
+    public Expression cloan() {
+      return new NotPCPhrase();
+    }
+  }
 
   static abstract class Factory {
     protected Expression prototype = null;
@@ -25,7 +52,6 @@ public class FactoryFmProto {
     public abstract Expression makeCompromise();
     public abstract Expression makeGrade();
   }
-
   static class PCFactory extends Factory {
     public PCFactory() {
       prototype = new PCPhrase();
@@ -37,7 +63,6 @@ public class FactoryFmProto {
       return new Expression( "\"you pass, self-esteem intact\"" );
     }
   }
-
   static class NotPCFactory extends Factory {
     public NotPCFactory() {
       prototype = new NotPCPhrase();
@@ -62,45 +87,4 @@ public class FactoryFmProto {
     System.out.println( factory.makeCompromise());
     System.out.println( factory.makeGrade());
   }
-
-  static class PCPhrase extends Expression {
-    static String[] list =  {
-      "\"animal companion\"", "\"vertically challenged\"", 
-        "\"factually inaccurate\"", "\"chronologically gifted\""
-    };
-    private static int next = 0;
-    public PCPhrase() {
-      super( list[next] );
-      next = ( next + 1 ) % list.length;
-    }
-    public Expression cloan() {
-      return new PCPhrase();
-    }
-  }
-
-  static class NotPCPhrase extends Expression {
-    private static String[] list =  {
-      "\"pet\"", "\"short\"", "\"lie\"", "\"old\""
-    };
-    private static int next = 0;
-    public NotPCPhrase() {
-      super( list[next] );
-      next = ( next + 1 ) % list.length;
-    }
-    public Expression cloan() {
-      return new NotPCPhrase();
-    }
-  }
 }
-
-Output
-
-// D:\Java\patterns> java FactoryFmProto
-// "short"  "lie"  "old"
-// "my way, or the highway"
-// "take test, deal with the results"
-
-// D:\Java\patterns> java FactoryFmProto 1
-// "vertically challenged"  "factually inaccurate"  "chronologically gifted"
-// "do it your way, any way, or no way"
-// "you pass, self-esteem intact"

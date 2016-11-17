@@ -3,7 +3,6 @@
 // URL: http://www.newthinktank.com/2012/10/flyweight-design-pattern-tutorial/
 // --------------
 
-// -------------- FLYWEIGHTTEST.JAVA -------------- //
 // The Flyweight design pattern is used when you need to create a large number of similar objects To reduce memory this pattern shares Objects that are the same rather than creating new ones
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -41,21 +40,9 @@ public class FlyWeightTest extends JFrame{
         Graphics g = drawingPanel.getGraphics();
         long startTime = System.currentTimeMillis();
         for(int i=0; i < 100000; ++i) {
-          //
           // Uses rectangles stored in the HashMap to speed up the program
           MyRect rect = RectFactory.getRect(getRandColor());
-          rect.draw(g, getRandX(), getRandY(),
-              getRandX(), getRandY());
-          //
-          /*
-          MyRect rect = new MyRect(getRandColor(), getRandX(), getRandY(), getRandX(), getRandY());
-          rect.draw(g);
-          */
-          //
-          /*
-          g.setColor(getRandColor());
-          g.fillRect(getRandX(), getRandY(), getRandX(), getRandY());
-          */
+          rect.draw(g, getRandX(), getRandY(), getRandX(), getRandY());
         }
         long endTime = System.currentTimeMillis();
         System.out.println("That took " + (endTime - startTime) + " milliseconds");
@@ -75,7 +62,6 @@ public class FlyWeightTest extends JFrame{
   }
 }
 
-// -------------- MYRECT.JAVA -------------- //
 import java.awt.*;
 public class MyRect {
    private Color color = Color.black;
@@ -87,22 +73,8 @@ public class MyRect {
       g.setColor(color);
       g.fillRect(upperX, upperY, lowerX, lowerY);
    }
-   /* Original forces creation of a rectangle every time
-   public MyRect(Color color, int upperX, int upperY, int lowerX, int lowerY) {
-    this.color = color;
-    this.x = upperX;
-    this.y = upperY;
-    this.x2 = lowerX;
-    this.y2 = lowerY;
-   }
-   public void draw(Graphics g) {
-    g.setColor(color);
-    g.fillRect(x, y, x2, y2);
-   }
-   */
 }
 
-// -------------- RECTFACTORY.JAVA -------------- //
 // This factory only creates a new rectangle if it uses a color not previously used Intrinsic State: Color Extrinsic State: X & Y Values
 import java.util.HashMap;
 import java.awt.Color;

@@ -10,76 +10,59 @@
 class TimeImp {
   public:
     TimeImp(int hr, int min) {
-        hr_ = hr;
-        min_ = min;
+      _hr = hr;
+      _min = min;
     }
-    virtual void tell() {
-        cout << "time is " << setw(2) << setfill(48) << hr_ << min_ << endl;
-    }
+    virtual void tell() { cout << "time is " << setw(2) << setfill(48) << _hr << _min << endl; }
   protected:
-    int hr_, min_;
+    int _hr, _min;
 };
-
-class CivilianTimeImp: public TimeImp {
+class CivilianTimeImp : public TimeImp {
   public:
     CivilianTimeImp(int hr, int min, int pm): TimeImp(hr, min) {
-        if (pm)
-          strcpy(whichM_, " PM");
-        else
-          strcpy(whichM_, " AM");
+      if (pm)
+        strcpy(_whichM, " PM");
+      else
+        strcpy(_whichM, " AM");
     }
 
     /* virtual */
-    void tell() {
-        cout << "time is " << hr_ << ":" << min_ << whichM_ << endl;
-    }
+    void tell() { cout << "time is " << _hr << ":" << _min << _whichM << endl; }
   protected:
-    char whichM_[4];
+    char _whichM[4];
 };
-
-class ZuluTimeImp: public TimeImp {
+class ZuluTimeImp : public TimeImp {
   public:
     ZuluTimeImp(int hr, int min, int zone): TimeImp(hr, min) {
-        if (zone == 5)
-          strcpy(zone_, " Eastern Standard Time");
-        else if (zone == 6)
-          strcpy(zone_, " Central Standard Time");
+      if (zone == 5)
+        strcpy(_zone, " Eastern Standard Time");
+      else if (zone == 6)
+        strcpy(_zone, " Central Standard Time");
     }
 
     /* virtual */
-    void tell() {
-        cout << "time is " << setw(2) << setfill(48) << hr_ << min_ << zone_ <<
-          endl;
-    }
+    void tell() { cout << "time is " << setw(2) << setfill(48) << _hr << _min << _zone << endl; }
   protected:
-    char zone_[30];
+    char _zone[30];
 };
 
 class Time {
   public:
     Time(){}
     Time(int hr, int min) {
-        imp_ = new TimeImp(hr, min);
+      _imp = new TimeImp(hr, min);
     }
-    virtual void tell() {
-        imp_->tell();
-    }
+    virtual void tell() { _imp->tell(); }
   protected:
-    TimeImp *imp_;
+    TimeImp *_imp;
 };
-
-class CivilianTime: public Time {
+class CivilianTime : public Time {
   public:
-    CivilianTime(int hr, int min, int pm) {
-        imp_ = new CivilianTimeImp(hr, min, pm);
-    }
+    CivilianTime(int hr, int min, int pm) { _imp = new CivilianTimeImp(hr, min, pm); }
 };
-
-class ZuluTime: public Time {
+class ZuluTime : public Time {
   public:
-    ZuluTime(int hr, int min, int zone) {
-        imp_ = new ZuluTimeImp(hr, min, zone);
-    }
+    ZuluTime(int hr, int min, int zone) { _imp = new ZuluTimeImp(hr, min, zone); }
 };
 
 int main() {
@@ -87,12 +70,7 @@ int main() {
   times[0] = new Time(14, 30);
   times[1] = new CivilianTime(2, 30, 1);
   times[2] = new ZuluTime(14, 30, 6);
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < 3; i++) {
     times[i]->tell();
+  }
 }
-
-// Output
-
-// time is 1430
-// time is 2:30 PM
-// time is 1430 Central Standard Time

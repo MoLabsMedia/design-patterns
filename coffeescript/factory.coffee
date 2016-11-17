@@ -3,9 +3,9 @@ class ConcreteProductA extends AbstractProduct
 class ConcreteProductB extends AbstractProduct
 class ConcreteProductC extends AbstractProduct
 
-class AbstractCreator
+class AbstractFactory
   build: ->
-class ConcreteCreator extends AbstractCreator
+class ConcreteFactory extends AbstractFactory
   build: ( type ) ->
     switch type
       when 'a'
@@ -17,10 +17,10 @@ class ConcreteCreator extends AbstractCreator
 
 class Main
   @run: ->
-    creator = new ConcreteCreator()
-    console.log creator.build( 'a' )
-    console.log creator.build( 'b' )
-    console.log creator.build( 'c' )
+    factory = new ConcreteFactory()
+    console.log factory.build( 'a' )
+    console.log factory.build( 'b' )
+    console.log factory.build( 'c' )
     return
 
 Main.run()

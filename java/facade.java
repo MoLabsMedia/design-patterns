@@ -10,12 +10,9 @@ class PointCarte {
     x = xx;
     y = yy;
   }
-  public void  move( int dx, int dy ) {
+  public void move( int dx, int dy ) {
     x += dx;
     y += dy;
-  }
-  public String toString() {
-    return "( " + x + "," + y + " )";
   }
   public double getX() {
     return x;
@@ -23,6 +20,9 @@ class PointCarte {
   public double getY() {
     return y;
   } 
+  public String toString() {
+    return "( " + x + "," + y + " )";
+  }
 }
 
 // 1. Subsystem
@@ -41,38 +41,31 @@ class PointPolar {
 }
 
 // 1. Desired interface: move(), rotate()
-class Point {
+class PointFacade {
   private PointCarte pc; // 2. Design a "wrapper" class
   
-  public Point( double xx, double yy ) {
-    pc = new PointCarte( xx,yy );
-  }
-  public String toString() {
-    return pc.toString();
-  }
+  public PointFacade( double xx, double yy ) { pc = new PointCarte( xx,yy ); }
+  public String toString() { return pc.toString(); }
   // 4. Wrapper maps
-  public void move( int dx, int dy ) {
-    pc.move( dx,dy );
-  }
-  public void rotate( int angle, Point o ) {
+  public void move( int dx, int dy ) { pc.move( dx,dy ); }
+  public void rotate( int angle, PointFacade o ) {
     double x = pc.getX() - o.pc.getX();
     double y = pc.getY() - o.pc.getY();
-    PointPolar pp = new PointPolar( Math.sqrt( x*x+y*y ),
-                          Math.atan2( y,x )*180/Math.PI );
+    PointPolar pp = new PointPolar( Math.sqrt( x*x+y*y ), Math.atan2( y,x )*180/Math.PI );
     // 4. Wrapper maps
     pp.rotate( angle );
     System.out.println( "  PointPolar is " + pp );
-    String str = pp.toString();  int i = str.indexOf( '@' );
+    String str = pp.toString();  
+    int i = str.indexOf( '@' );
     double r = Double.parseDouble( str.substring( 1,i ) );
     double a = Double.parseDouble( str.substring( i+1,str.length()-1) );
-    pc = new PointCarte( r*Math.cos(a*Math.PI/180 ) + o.pc.getX(),
-                  r*Math.sin( a*Math.PI/180 ) + o.pc.getY() );
+    pc = new PointCarte( r*Math.cos(a*Math.PI/180 ) + o.pc.getX(), r*Math.sin( a*Math.PI/180 ) + o.pc.getY() );
   }
 }
 
 class Line {
-  private Point o, e;
-  public Line( Point ori, Point end ) {
+  private PointFacade o, e;
+  public Line( PointFacade ori, PointFacade end ) {
     o = ori;
     e = end;
   }
@@ -83,28 +76,16 @@ class Line {
   public void  rotate( int angle ) {
     e.rotate( angle, o );
   }
-  public String toString() {
-    return "origin is " + o + ", end is " + e;
-  }
+  public String toString() { return "origin is " + o + ", end is " + e; }
 }
 
 class FacadeDemo {
   public static void main( String[] args ) {
     // 3. Client uses the Facade
-    Line line1 = new Line( new Point( 2,4 ), new Point( 5,7 ) );
+    Line line1 = new Line( new PointFacade( 2,4 ), new PointFacade( 5,7 ) );
     line1.move( -2,-4 );
-    System.out.println( "after move:  " + line1 );
     line1.rotate(45);
-    System.out.println( "after rotate: " + line1 );
-    Line line2 = new Line( new Point( 2,1 ), new Point( 2.866,1.5 ) );
+    Line line2 = new Line( new PointFacade( 2,1 ), new PointFacade( 2.866,1.5 ) );
     line2.rotate(30);
-    System.out.println( "30 degrees to 60 degrees: " + line2 );
   }
 }
-
-// Output:
-// after move:   origin is ( 0.0,0.0 ), end is ( 3.0,3.0 )
-//    PointPolar is [4.242@90.0]
-// after rotate: origin is ( 0.0,0.0 ), end is ( 0.000,4.242 )
-//    PointPolar is [0.999@60.0]
-// 30 degrees to 60 degrees: origin is ( 2.0,1.0 ), end is ( 2.499,1.866 )

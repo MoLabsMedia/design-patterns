@@ -6,16 +6,13 @@ class ConcreteFlyweight extends AbstractFlyweight
   process: ( external ) ->
     @internal.push external
     return this
-  render: () ->
+  show: () ->
     console.log @internal
     return
 
 class FlyweightFactory
   constructor: -> @flyweights = {}
-  getFlyweight: ( key ) ->
-    if not @flyweights[ key ]? 
-      @flyweights[ key ] = new ConcreteFlyweight( key )
-    return @flyweights[ key ]
+  getFlyweight: ( key ) -> return @flyweights[ key ] ?= new ConcreteFlyweight( key )
 
 class Main
   @run: ->
@@ -24,9 +21,9 @@ class Main
     b = factory.getFlyweight( 'b' )
     c = factory.getFlyweight( 'c' )
     d = factory.getFlyweight( 'a' )
-    a.process( 'red' ).render()
-    b.process( 'green' ).render()
-    c.process( 'blue' ).render()
-    d.process( 'black' ).render()
+    a.process( 'red' ).show()
+    b.process( 'green' ).show()
+    c.process( 'blue' ).show()
+    d.process( 'black' ).show()
 
 Main.run()

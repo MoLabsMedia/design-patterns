@@ -5,7 +5,6 @@ class AbstractComponent
   process: ->
     console.log 'default process'
     return
-    
 class ConcreteComponent extends AbstractComponent
   process: () ->
     console.log 'process through ConcreteComponent its self'

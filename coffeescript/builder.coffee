@@ -1,30 +1,53 @@
+class Part
+  constructor: () ->
+    console.log 'It is a part.'
+    return
+class Head extends Part
+  constructor: () ->
+    console.log 'It is the head.'
+    return this
+class Body extends Part
+  constructor: () ->
+    console.log 'It is the body.'
+    return this
+class Tail extends Part
+  constructor: () ->
+    console.log 'It is the tail.'
+    return this
+
 class Product
   constructor: -> 
-    @final_product = []
+    @parts = []
     return
   addPart: ( part ) -> 
-    @final_product.push part
+    switch part
+      when 'head'
+        @parts.push new Head()
+      when 'body'
+        @parts.push new Body()
+      when 'tail'
+        @parts.push new Tail()
+      else
+        console.log 'can not add ' + part
     return
-  display: () -> 
-    return @final_product
+  show: () -> return @parts
 
 class AbstractBuilder
-  buildPart: ->
+  addPart: ->
 class ConcreteBuilder extends AbstractBuilder
   constructor: -> 
     @product = new Product()
     return
-  buildPart: ( part ) -> 
+  addPart: ( part ) -> 
     @product.addPart( part )
     return
-  getProduct: -> 
-    return @product
+  getProduct: -> return @product
 
 class Assembler
   constructor: ( @builder ) ->
   assemble: ( parts ) ->
     for part in parts
-      @builder.buildPart( part )
+      @builder.addPart( part )
     return
 
 class Client
@@ -33,7 +56,7 @@ class Client
     assembly = new Assembler( concreteBuilder )
     assembly.assemble( [ 'head', 'body', 'tail' ] )
     product = concreteBuilder.getProduct()
-    console.log product.display()
+    console.log product.show()
     return
 
 Main.run()

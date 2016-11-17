@@ -9,21 +9,6 @@ class Node {
   public Node( int i ) { value = i; }
 }
 
-class StackArray {
-  private int[] items = new int[12];
-  private int   total = -1;
-  public void push( int i ) { if ( ! isFull()) items[++total] = i; }
-  public boolean isEmpty()  { return total == -1; }
-  public boolean isFull()   { return total == 11; }
-  public int top() {
-    if ( isEmpty()) return -1;
-    return items[total];
-  }
-  public int pop() {
-    if ( isEmpty()) return -1;
-    return items[total--];
-}   }
-
 class StackList {
   private Node last;
   public void push( int i ) {
@@ -45,8 +30,24 @@ class StackList {
     int ret = last.value;
     last = last.prev;
     return ret;
-}   }
+  }   
+}
 
+class StackArray {
+  private int[] items = new int[12];
+  private int   total = -1;
+  public void push( int i ) { if ( ! isFull()) items[++total] = i; }
+  public boolean isEmpty()  { return total == -1; }
+  public boolean isFull()   { return total == 11; }
+  public int top() {
+    if ( isEmpty()) return -1;
+    return items[total];
+  }
+  public int pop() {
+    if ( isEmpty()) return -1;
+    return items[total--];
+  }   
+}
 class StackFIFO extends StackArray {
   private StackArray temp = new StackArray();
   public int pop() {
@@ -56,8 +57,8 @@ class StackFIFO extends StackArray {
     while ( ! temp.isEmpty())
       push( temp.pop() );
     return ret;
-}  }
-
+  }  
+}
 class StackHanoi extends StackArray {
   private int totalRejected = 0;
   public int reportRejected()   { return totalRejected; }
@@ -65,7 +66,8 @@ class StackHanoi extends StackArray {
     if ( ! isEmpty()  &&  in > top())
       totalRejected++;
     else super.push( in );
-}   }
+  }   
+}
 
 class BridgeDisc {
   public static void main( String[] args ) {
@@ -93,11 +95,5 @@ class BridgeDisc {
     System.out.println();
     System.out.println( "total rejected is "
       + ( (StackHanoi )stacks[2]).reportRejected() );
-}   }
-
-// Output:
-// 12  11  10  9  8  7  6  5  4  3  2  1
-// 14  13  12  11  10  9  8  7  6  5  4  3  2  1
-// 1  2  3  4  5  6  7  8  9  10  11  12
-// 0  0  1  12  16  18
-// total rejected is 8
+  }   
+}

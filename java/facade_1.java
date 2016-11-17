@@ -3,7 +3,6 @@
 // URL: http://www.newthinktank.com/2012/09/facade-design-pattern-tutorial/
 // --------------
 
-// -------------- WELCOMETOBANK.JAVA -------------- //
 public class WelcomeToBank{
   public WelcomeToBank() {
     System.out.println("Welcome to ABC Bank");
@@ -11,7 +10,6 @@ public class WelcomeToBank{
   }
 }
 
-// -------------- ACCOUNTNUMBERCHECK.JAVA -------------- //
 public class AccountNumberCheck{
   private int accountNumber = 12345678;
   public int getAccountNumber() { return accountNumber; }
@@ -24,7 +22,6 @@ public class AccountNumberCheck{
   }
 }
 
-// -------------- SECURITYCODECHECK.JAVA -------------- //
 public class SecurityCodeCheck {
   private int securityCode = 1234;
   public int getSecurityCode() { return securityCode; }
@@ -37,7 +34,6 @@ public class SecurityCodeCheck {
   }
 }
 
-// -------------- FUNDSCHECK.JAVA -------------- //
 public class FundsCheck {
   private double cashInAccount = 1000.00;
   public double getCashInAccount() { return cashInAccount; }
@@ -60,7 +56,6 @@ public class FundsCheck {
   }
 }
 
-// -------------- BANKACCOUNTFACADE.JAVA -------------- //
 // The Facade Design Pattern decouples or separates the client from all of the sub components The Facades aim is to simplify interfaces so you don't have to worry about what is going on under the hood
 public class BankAccountFacade {
   private int accountNumber;
@@ -99,7 +94,6 @@ public class BankAccountFacade {
   }
 }
 
-// -------------- TESTBANKACCOUNT.JAVA -------------- //
 public class TestBankAccount {
   public static void main(String[] args){
     BankAccountFacade accessingBank = new BankAccountFacade(12345678, 1234);

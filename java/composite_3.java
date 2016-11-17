@@ -4,13 +4,11 @@
 // --------------
 
 interface Component { void traverse(); }      // 1. "lowest common denominator" 
-
 class Primitive implements Component {        // 2. "Isa" relationship
   private int value;
   public Primitive( int val ) { value = val; }
   public void traverse()      { System.out.print( value + "  " ); }
 }
-
 abstract class Composite implements Component {      // 2. "Isa" relationship
   private Component[] children = new Component[9];  // 3. Couple to interface
   private int         total    = 0;
@@ -21,21 +19,22 @@ abstract class Composite implements Component {      // 2. "Isa" relationship
     System.out.print( value + "  " );
     for ( int i = 0; i < total; i++ )
       children[i].traverse();            // 4. Delegation and polymorphism 
-}  }
-
+  }  
+}
 class Row extends Composite {                // Two different kinds of "con-
   public Row( int val ) { super( val ); }   // tainer" classes.  Most of the
   public void traverse() {                  // "meat" is in the Composite
     System.out.print( "Row" );             // base class.
     super.traverse();
-}  }
-
+  }  
+}
 class Column extends Composite {
   public Column( int val ) { super( val ); }
   public void traverse() {
     System.out.print( "Col" );
     super.traverse();
-}  }
+  }  
+}
 
 public class CompositeDemo {
   public static void main( String[] args ) {
@@ -54,7 +53,5 @@ public class CompositeDemo {
     fourth.add( new Primitive( 9 ) );         //   |     |     +-- 10
     fifth.add( new Primitive(10 ) );         //   |     +-- 8
     first.traverse();                         //   +-- 6
-}  }
-
-// Output:
-// Row1  Col2  7  Col3  Row4  9  Row5  10  8  6
+  }  
+}

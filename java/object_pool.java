@@ -3,8 +3,6 @@
 // URL: https://sourcemaking.com/design_patterns/object_pool/java
 // --------------
 
-// ObjectPool class
-
 public abstract class ObjectPool<T> {
   private long expirationTime;
 

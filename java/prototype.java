@@ -5,34 +5,19 @@
 
 public class FactoryProto {
   interface Xyz {
-    Xyz cloan();
+    Xyz clone();
   }
-
   static class Tom implements Xyz {
-    public Xyz    cloan()    {
-      return new Tom();
-    }
-    public String toString() {
-      return "ttt";
-    }
+    public Xyz clone() { return new Tom(); }
+    public String toString() { return "ttt"; }
   }
-
   static class Dick implements Xyz {
-    public Xyz    cloan()    {
-      return new Dick();
-    }
-    public String toString() {
-      return "ddd";
-    }
+    public Xyz clone() { return new Dick(); }
+    public String toString() { return "ddd"; }
   }
-
   static class Harry implements Xyz {
-    public Xyz    cloan()    {
-      return new Harry();
-    }
-    public String toString() {
-      return "hhh";
-    }
+    public Xyz clone() { return new Harry(); }
+    public String toString() { return "hhh"; }
   }
 
   static class Factory {
@@ -43,7 +28,7 @@ public class FactoryProto {
       prototypes.put( "harry", new Harry() );
     }
     public static Xyz makeObject( String s ) {
-      return ( (Xyz )prototypes.get( s)).cloan();
+      return ( (Xyz) prototypes.get(s) ).clone();
     }
   }
 
@@ -53,7 +38,3 @@ public class FactoryProto {
     }
   }
 }
-
-// Output:
-// D:\Java\patterns> java FactoryProto tom dick tom harry tom
-// ttt  ddd  ttt  hhh  ttt

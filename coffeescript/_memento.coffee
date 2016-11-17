@@ -5,8 +5,7 @@ class Memento
 
 class Originator
   constructor: ( @prop ) ->
-  createMementoFromProperty: -> 
-    return new Memento( @prop )
+  createMementoFromProperty: -> return new Memento( @prop )
   changePropByMemento: ( memento ) ->
     @prop = memento.getProp()
     return

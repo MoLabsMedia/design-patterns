@@ -61,7 +61,6 @@ class Builder
   protected:
     DistrWorkPackage *_result;
 };
-
 class UnixBuilder: public Builder
 {
   public:
@@ -82,7 +81,6 @@ class UnixBuilder: public Builder
         _result->setPathway("thread", type);
     }
 };
-
 class VmsBuilder: public Builder
 {
   public:
@@ -115,7 +113,6 @@ class Reader
   private:
     Builder *_builder;
 };
-
 void Reader::construct(PersistenceAttribute list[], int num)
 {
   for (int i = 0; i < num; i++)
@@ -169,21 +166,3 @@ int main()
   reader.construct(input, NUM_ENTRIES);
   cout << vmsBuilder.getResult()->getState() << endl;
 }
-
-
-// Output
-
-// Distributed Work Package for: Unix
-//   File(flatFile): state.dat
-//   File(flatFile): config.sys
-//   Queue(FIFO): compute
-//   Queue(FIFO): log
-//   Pathway(thread): authentication
-//   Pathway(thread): error processing
-// Distributed Work Package for: Vms
-//   File(ISAM): state.dat
-//   File(ISAM): config.sys
-//   Queue(priority): compute
-//   Queue(priority): log
-//   Pathway(LWP): authentication
-//   Pathway(LWP): error processing

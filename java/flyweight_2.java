@@ -8,9 +8,7 @@ import java.util.Vector;
 
 class ColorBox2 extends Canvas {
   private Color  curColor = getColor();
-  private static Color[]  colors = { Color.black, Color.blue, Color.cyan,
-    Color.darkGray, Color.gray, Color.green, Color.lightGray, Color.red,
-    Color.magenta, Color.orange, Color.pink, Color.white, Color.yellow };
+  private static Color[]  colors = { Color.black, Color.blue, Color.cyan, Color.darkGray, Color.gray, Color.green, Color.lightGray, Color.red, Color.magenta, Color.orange, Color.pink, Color.white, Color.yellow };
 
   public ColorBox2( ThreadPool2 tp ) {
     tp.register( this );
@@ -25,7 +23,8 @@ class ColorBox2 extends Canvas {
   public void paint( Graphics g ) {
     g.setColor( curColor );
     g.fillRect( 0, 0, getWidth(), getHeight() );
-}  }
+  }  
+}
 
 class ThreadPool2 {
   private final int NUM_THREADS = 8;
@@ -38,7 +37,9 @@ class ThreadPool2 {
         ( (ColorBox2 ) cboxes.elementAt(
           ( int )( Math.random()*1000) % cboxes.size() ) ).changeColor();
         try { Thread.sleep( pause ); } catch( InterruptedException e ) { }
-  }  }  }
+    }  
+  }  
+}
 
   public ThreadPool2( int p ) {
     pause = p;
@@ -48,7 +49,8 @@ class ThreadPool2 {
   }
   public void start() {
     for ( int i = 0; i < NUM_THREADS; i++ ) new HandlerThread().start();
-}  }
+  }  
+}
 
 public class ColorBoxes2 {
   public static void main( String[] args ) {
@@ -65,9 +67,5 @@ public class ColorBoxes2 {
     f.setSize( 500, 400 );
     f.setVisible( true );
     tp.start();
-}  }
-
-// Output:
-// D:> java ColorBoxes 18 50
-//         produces 324 boxes, 8 threads, and 50 millisecond sleep()
-//             performance is very much improved
+  }  
+}

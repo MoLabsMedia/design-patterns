@@ -16,7 +16,7 @@ class ExecuteInterface {
 
 // 2. Design a "wrapper" or "adapter" class
 template <class TYPE>
-class ExecuteAdapter: public ExecuteInterface {
+class ExecuteAdapter : public ExecuteInterface {
   public:
     ExecuteAdapter(TYPE *o, void(TYPE:: *m)()) {
       object = o;
@@ -37,8 +37,7 @@ class ExecuteAdapter: public ExecuteInterface {
 };
 
 
-// The old: three totally incompatible classes
-// no common base class,
+// The old: three totally incompatible classes no common base class,
 class Fea {
   public:
   // no hope of polymorphism
@@ -94,12 +93,3 @@ int main() {
   delete objects;
   return 0;
 }
-
-// Output
-
-// Fea::doThis()
-// Feye::doThat()
-// Pheau::doTheOther()
-// Fea::dtor
-// Feye::dtor
-// Pheau::dtor

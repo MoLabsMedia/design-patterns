@@ -24,11 +24,13 @@ class ColorBox extends Canvas implements Runnable {
       curColor = getColor();
       repaint();
       try { Thread.sleep( pause ); } catch( InterruptedException e ) { }
-  }  }
+    }  
+  }
   public void paint( Graphics g ) {
     g.setColor( curColor );
     g.fillRect( 0, 0, getWidth(), getHeight() );
-}  }
+  }  
+}
 
 public class ColorBoxes {
   public static void main( String[] args ) {
@@ -40,8 +42,5 @@ public class ColorBoxes {
     for ( int i = 0; i < size*size; i++ ) f.add( new ColorBox( pause ) );
     f.setSize( 500, 400 );
     f.setVisible( true );
-}  }
-
-// Output:
-// D:> java ColorBoxes 18 50
-//         produces 324 boxes/threads and 50 millisecond sleep()
+  }  
+}

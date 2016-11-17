@@ -34,7 +34,8 @@ class FlyweightFactory {
     for ( java.util.Iterator it = ht.keySet().iterator(); it.hasNext(); )
       System.out.print( it.next() + " " );
     System.out.println();
-}  }
+  }  
+}
 
 class ButtonListener implements ActionListener {
   public void actionPerformed( ActionEvent e) {
@@ -47,7 +48,8 @@ class ButtonListener implements ActionListener {
     //    ( the Button label is intrinsic state )
     System.out.println( "label-" + e.getActionCommand()
       + "  x-" + i/10   + "  y-" + i%10 );  // 1. Identify extrinsic state
-}  }                                           //    ( Button location )
+  }  
+}                                           //    ( Button location )
 
 public class FlyweightDemo {
   public static void main( String[] args ) {
@@ -68,16 +70,5 @@ public class FlyweightDemo {
     frame.pack();
     frame.setVisible( true );
     FlyweightFactory.report();
-}  }
-
-// Output:
-// new Buttons - 15, "shared" Buttons - 85, 0 1 10 11 12 13 14 2 3 4 5 6 7 8 9
-// label-0  x-1  y-1
-// label-0  x-2  y-2
-// label-0  x-6  y-5
-// label-0  x-2  y-5
-// label-0  x-9  y-0
-// label-1  x-9  y-9
-// label-1  x-2  y-8
-// label-1  x-5  y-8
-// label-1  x-3  y-1
+  }  
+}

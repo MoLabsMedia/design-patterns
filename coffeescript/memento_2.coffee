@@ -4,13 +4,11 @@
 
 class Memento
   constructor: ( @prop ) ->
-  getProp: () ->
-    return @prop
+  getProp: () -> return @prop
 
 class Config
   constructor: ( @prop ) ->
-  getProp: () ->
-    return @prop
+  getProp: () -> return @prop
   saveProp: ( prop_val ) ->
     @prop = prop_val
     memento = new Memento( @prop )

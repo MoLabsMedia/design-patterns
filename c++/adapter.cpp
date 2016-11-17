@@ -8,64 +8,40 @@
 typedef int Coordinate;
 typedef int Dimension;
 
-// Desired interface
-class Rectangle
-{
+class Rectangle {
   public:
     virtual void draw() = 0;
 };
-
-// Legacy component
-class LegacyRectangle
-{
+class LegacyRectangle {
   public:
-    LegacyRectangle(Coordinate x1, Coordinate y1, Coordinate x2, Coordinate y2)
-    {
-        x1_ = x1;
-        y1_ = y1;
-        x2_ = x2;
-        y2_ = y2;
-        cout << "LegacyRectangle:  create.  (" << x1_ << "," << y1_ << ") => ("
-          << x2_ << "," << y2_ << ")" << endl;
+    LegacyRectangle(Coordinate x1, Coordinate y1, Coordinate x2, Coordinate y2) {
+      _x1 = x1;
+      _y1 = y1;
+      _x2 = x2;
+      _y2 = y2;
+      cout << "LegacyRectangle:  create.  (" << _x1 << "," << _y1 << ") => (" << _x2 << "," << _y2 << ")" << endl;
     }
-    void oldDraw()
-    {
-        cout << "LegacyRectangle:  oldDraw.  (" << x1_ << "," << y1_ << 
-          ") => (" << x2_ << "," << y2_ << ")" << endl;
+    void oldDraw() {
+      cout << "LegacyRectangle:  oldDraw.  (" << _x1 << "," << _y1 << ") => (" << _x2 << "," << _y2 << ")" << endl;
     }
   private:
-    Coordinate x1_;
-    Coordinate y1_;
-    Coordinate x2_;
-    Coordinate y2_;
+    Coordinate _x1;
+    Coordinate _y1;
+    Coordinate _x2;
+    Coordinate _y2;
 };
-
-// Adapter wrapper
-class RectangleAdapter: public Rectangle, private LegacyRectangle
-{
+class RectangleAdapter: public Rectangle, private LegacyRectangle {
   public:
-    RectangleAdapter(Coordinate x, Coordinate y, Dimension w, Dimension h):
-      LegacyRectangle(x, y, x + w, y + h)
-    {
-        cout << "RectangleAdapter: create.  (" << x << "," << y << 
-          "), width = " << w << ", height = " << h << endl;
+    RectangleAdapter(Coordinate x, Coordinate y, Dimension w, Dimension h) : LegacyRectangle(x, y, x + w, y + h) {
+      cout << "RectangleAdapter: create.  (" << x << "," << y << "), width = " << w << ", height = " << h << endl;
     }
-    virtual void draw()
-    {
-        cout << "RectangleAdapter: draw." << endl;
-        oldDraw();
+    virtual void draw() {
+      cout << "RectangleAdapter: draw." << endl;
+      oldDraw();
     }
 };
 
-int main()
-{
+int main() {
   Rectangle *r = new RectangleAdapter(120, 200, 60, 40);
   r->draw();
 }
-
-// Output
-
-// LegacyRectangle:  create.  (120,200) => (180,240)
-// RectangleAdapter: create.  (120,200), width = 60, height = 40
-// RectangleAdapter: draw.
-// LegacyRectangle:  oldDraw.  (120,200) => (180,240)
