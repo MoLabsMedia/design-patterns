@@ -6,6 +6,11 @@ Proc_x extends PROC # proc_x( info_x )
 Wrapper_Proc # wrapper_proc( proc_x )
 ```
 
+- abstract product generate concrete products
+- abstract factory generate concrete factories
+  - concrete factory methods instantiate concrete products
+- a procedure instantiate concrete factory to 'produce/build/make' some products
+
 ### Builder
 ```coffeescript
 Info_x extends INFO
@@ -14,11 +19,19 @@ Proc # proc( wrapper_info )
 Wrapper_Proc # wrapper_proc( proc )
 ```
 
+- abstract part generate concrete parts
+- a product use methods to instantiate concrete parts
+- a factory use the product methods to generate parts and provide method to assemble the final product
+- a procedure instantiate factory to 'produce/build/make' a product
+
 ### Factory Method
 ```coffeescript
 Info_x extends INFO
 Proc # proc( token_info_x )
 ```
+
+- abstract product generate concrete products
+- a factory method instantiate different products according to a 'token/key/id' as a parameter to 'produce/build/make' a product
 
 ### Object Pool
 ```coffeescript
@@ -30,11 +43,15 @@ Proc # proc( token_info_x )
 Info # info.clone -> return _info
 ```
 
+- a product provide method to 'clone/copy/duplicate' itsself to lessen the costly creation procedure
+
 ### Singleton
 ```coffeescript
 Proc # Proc.getInstance( Info )
   # _info ?= new Info()
 ```
+
+- a product provide static method to check existence of its instance and instantiate if not exist
 
 ## Structural patterns
 ### Adapter
