@@ -154,8 +154,9 @@ Proc # proc( info_x ), proc.process( info_x.process() )
 ```
 
 #### NOTE:
-upper case: `abstract classes`
 
-camel case: `concrete/normal classes`
+`upper case`: abstract classes
 
-lower case: `class instancees`
+`camel case`: concrete/normal classes
+
+`lower case`: class instances
