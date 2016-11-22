@@ -1,36 +1,39 @@
 class AbstractProductA
-  constructor: () -> 
 class ConcreteProductA1 extends AbstractProductA
 class ConcreteProductA2 extends AbstractProductA
 
 class AbstractProductB
-  constructor: ( arg ) -> 
 class ConcreteProductB1 extends AbstractProductB
 class ConcreteProductB2 extends AbstractProductB
 
 class AbstractFactory
-  buildA: ->
-  buildB: ->
+  build_a: ->
+  build_b: ->
 class ConcreteFactoryA extends AbstractFactory
-  buildA: -> return new ConcreteProductA1()
-  buildB: -> return new ConcreteProductB1()
+  build_a: -> 
+    return new ConcreteProductA1()
+  build_b: -> 
+    return new ConcreteProductB1()
 class ConcreteFactoryB extends AbstractFactory
-  buildA: -> return new ConcreteProductA2()
-  buildB: -> return new ConcreteProductB2()
+  build_a: -> 
+    return new ConcreteProductA2()
+  build_b: -> 
+    return new ConcreteProductB2()
 
 class Order
   constructor: ( factory ) ->
-    @productA = factory.buildA()
-    @productB = factory.buildB()
+    @productA = factory.build_a()
+    @productB = factory.build_b()
     return
 
 class Main
   @run: ->
-    factoryA = new ConcreteFactoryA()
-    builderA = new Order( factoryA )
+    factory_a = new ConcreteFactoryA()
+    builder_a = new Order( factory_a )
     
-    factoryB = new ConcreteFactoryB()
-    builderB = new Order( factoryB )
+    factory_b = new ConcreteFactoryB()
+    builder_b = new Order( factory_b )
+    
     return
     
 Main.run()

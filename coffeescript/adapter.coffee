@@ -1,23 +1,19 @@
 class Adaptee
-  request: -> 
-    console.log 'Adaptee request'
-    return
+  doSomething: -> 
 
-class Target
-  request: -> 
-    console.log 'default request'
-    return
-class Adapter extends Target
+class Interface
+  process: -> 
+class Adapter extends Interface
   constructor: ( @adaptee ) ->
-  request: -> 
-    @adaptee.request()
+  process: -> 
+    @adaptee.doSomething()
     return
 
 class Main
   @run: ->
     adaptee = new Adaptee()
     adapter = new Adapter( adaptee )
-    adapter.request()
+    adapter.process()
     return
 
 Main.run()

@@ -29,12 +29,6 @@ Creates an instance of several derived classes
 - Defining a "virtual" constructor.
 - The new operator considered harmful.
 
-#### object pool
-
-Avoid expensive acquisition and release of resources by recycling objects that are no longer in use
-
-- Object pooling can offer a significant performance boost; it is most effective in situations where the cost of initializing a class instance is high, the rate of instantiation of a class is high, and the number of instantiations in use at any one time is low.
-
 #### prototype
 
 A fully initialized instance to be copied or cloned
@@ -98,15 +92,6 @@ A fine-grained instance used for efficient sharing
 - Use sharing to support large numbers of fine-grained objects efficiently.
 - The Motif GUI strategy of replacing heavy-weight widgets with light-weight gadgets.
 
-#### private class data
-
-Restricts accessor/mutator access
-
-- Control write access to class attributes
-- Separate data from methods that use it
-- Encapsulate class data initialization
-- Providing new type of final - final after constructor
-
 #### proxy
 
 An object representing another object
@@ -163,18 +148,6 @@ Capture and restore an object's internal state
 - Without violating encapsulation, capture and externalize an object's internal state so that the object can be returned to this state later.
 - A magic cookie that encapsulates a "check point" capability.
 - Promote undo or rollback to full object status.
-
-#### null object
-
-Designed to act as a default value of an object
-
-The intent of a Null Object is to encapsulate the absence of an object by providing a substitutable alternative that offers suitable default do nothing behavior. In short, a design where "nothing will come of nothing"
-
-Use the Null Object pattern when
-
-- an object requires a collaborator. The Null Object pattern does not introduce this collaboration--it makes use of a collaboration that already exists
-- some collaborator instances should do nothing
-- you want to abstract the handling of null away from the client
 
 #### observer
 

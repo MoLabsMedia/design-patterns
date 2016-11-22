@@ -2,12 +2,8 @@ class AbstractImplementor
   implement: ->
 class ConcreteImplementorA extends AbstractImplementor
   implement: -> 
-    console.log 'ConcreteImplementorA implement'
-    return
 class ConcreteImplementorB extends AbstractImplementor
   implement: -> 
-    console.log 'ConcreteImplementorB implement'
-    return
 
 class AbstractExecutor
   constructor: ( @imp ) ->
@@ -19,13 +15,13 @@ class ConcreteExecutorB extends AbstractExecutor
 
 class Main
   @run: ->
-    ConcreteImplementorA = new ConcreteImplementorA()
-    refinedExecutorA = new ConcreteExecutorA( ConcreteImplementorA )
-    refinedExecutorA.implement()
+    concrete_implementor_a = new ConcreteImplementorA()
+    concrete_executor_a = new ConcreteExecutorA( concrete_implementor_a )
+    concrete_executor_a.implement()
 
-    ConcreteImplementorB = new ConcreteImplementorB()
-    refinedExecutorB = new ConcreteExecutorB( ConcreteImplementorB )
-    refinedExecutorB.implement()
+    concrete_implementor_b = new ConcreteImplementorB()
+    concrete_executor_b = new ConcreteExecutorB( concrete_implementor_b )
+    concrete_executor_b.implement()
     return
     
 Main.run()

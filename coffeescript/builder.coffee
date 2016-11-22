@@ -1,24 +1,10 @@
 class Part
-  constructor: () ->
-    console.log 'It is a part.'
-    return
 class Head extends Part
-  constructor: () ->
-    console.log 'It is the head.'
-    return this
 class Body extends Part
-  constructor: () ->
-    console.log 'It is the body.'
-    return this
 class Tail extends Part
-  constructor: () ->
-    console.log 'It is the tail.'
-    return this
 
 class Product
-  constructor: -> 
-    @parts = []
-    return
+  parts: []
   addPart: ( part ) -> 
     switch part
       when 'head'
@@ -28,16 +14,14 @@ class Product
       when 'tail'
         @parts.push new Tail()
       else
-        console.log 'can not add ' + part
+        console.log 'there is no such part.'
     return
-  show: () -> return @parts
+  display: () -> return @parts
 
 class AbstractBuilder
   addPart: ->
 class ConcreteBuilder extends AbstractBuilder
-  constructor: -> 
-    @product = new Product()
-    return
+  product: new Product()
   addPart: ( part ) -> 
     @product.addPart( part )
     return
@@ -50,13 +34,14 @@ class Assembler
       @builder.addPart( part )
     return
 
-class Client
+class Main
   @run: ->
-    concreteBuilder = new ConcreteBuilder()
-    assembly = new Assembler( concreteBuilder )
-    assembly.assemble( [ 'head', 'body', 'tail' ] )
-    product = concreteBuilder.getProduct()
-    console.log product.show()
+    concrete_builder = new ConcreteBuilder()
+    assembler = new Assembler( concrete_builder )
+    parts = [ 'head', 'body', 'tail' ]
+    assembler.assemble( parts )
+    product = concrete_builder.getProduct()
+    console.log product.display()
     return
 
 Main.run()
